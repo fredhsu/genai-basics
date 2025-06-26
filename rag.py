@@ -1,11 +1,3 @@
-"""
-Simple RAG (Retrieval-Augmented Generation) Example
-Using Google Gemini and local FAISS vector database
-
-Requirements:
-pip install google-genai faiss-cpu sentence-transformers numpy
-"""
-
 import faiss
 from google import genai
 from google.genai.types import HttpOptions
@@ -19,7 +11,7 @@ client = genai.Client(http_options=HttpOptions(api_version="v1"))
 print("Loading embedding model...")
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
-with open("7280r3.txt", "r", encoding="utf-8") as file:
+with open("data.txt", "r", encoding="utf-8") as file:
     lines = [line.rstrip("\n") for line in file.readlines()]
 #
 # Sample knowledge base 7280 datasheet
@@ -77,16 +69,11 @@ Answer:"""
     return response.text, retrieved_docs
 
 
-# Demo queries
 if __name__ == "__main__":
     queries = [
-        "Does the 7280R3 support MACsec?",
-        "What is the 7280CR3MK-32P4S?",
+        "What accessory kits does the DCS-7280CR3K-32D4 come with?",
+        "What accessory kits does the DCS-7280CR3A-72 ccome with?",
     ]
-
-    print("\n" + "=" * 50)
-    print("RAG DEMO")
-    print("=" * 50)
 
     for query in queries:
         print(f"\n🔍 Query: {query}")
