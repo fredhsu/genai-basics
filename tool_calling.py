@@ -19,7 +19,8 @@ def get_current_nba_champions():
     if isinstance(s, str):
         return "Search failed"
     else:
-        return s["organic_results"][0]
+        results = [snip["snippet"] for snip in s["organic_results"][:2]]
+        return results
 
 
 def main():
