@@ -71,8 +71,8 @@ Answer:"""
 
 if __name__ == "__main__":
     queries = [
-        "What accessory kits does the DCS-7280CR3K-32D4 come with?",
-        "What accessory kits does the DCS-7280CR3A-72 ccome with?",
+        "What accessory kits does the DCS-7280CR3K-96 come with?",
+        "What accessory kits does the DCS-7280CR3A-72 come with?",
     ]
 
     for query in queries:

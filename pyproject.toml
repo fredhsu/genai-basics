@@ -1,12 +1,15 @@
 [project]
-name = "tech-friday-genai"
+name = "genai-basics"
 version = "0.1.0"
-description = "Add your description here"
+description = "Some basic working examples of GenAI"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "faiss-cpu>=1.11.0",
-    "google-genai>=1.21.1",
-    "sentence-transformers>=4.1.0",
-    "serpapi>=0.1.5",
+  "faiss-cpu>=1.11.0",
+  "google-genai>=1.21.1",
+  "sentence-transformers>=4.1.0",
+  "serpapi>=0.1.5",
 ]
+[tool.pyright]
+reportMissingTypeStubs = false
+reportUnknownVariableType = false

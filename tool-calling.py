@@ -8,7 +8,7 @@ import os
 def get_current_nba_champions():
     """Returns the current NBA champions by using Google search"""
 
-    sapi = serpapi.Client(api_key=os.environ["SERPAPI_KEY"])
+    sapi = serpapi.Client(api_key=os.environ["SERP_API_KEY"])
     s = sapi.search(
         q="Who are the current NBA Champions?",
         engine="google",
@@ -16,39 +16,47 @@ def get_current_nba_champions():
         hl="en",
         gl="us",
     )
-    return s["organic_results"][0]
+    if isinstance(s, str):
+        return "Search failed"
+    else:
+        return s["organic_results"][0]
 
 
 def main():
+    # setup the gemini client
     model = "gemini-2.0-flash"
     client = genai.Client(http_options=HttpOptions(api_version="v1"))
+
+    query = "Who are the current NBA Champions?"
+
     print("== Response without tool calling ==")
-    print(no_tools(client, model))
+    response = no_tools(query, client, model)
+    print_response(query, response)
+
     print("== Response with tool calling ==")
-    print(with_tools(client, model))
+    response = with_tools(query, client, model)
+    print_response(query, response)
 
 
-def no_tools(client: genai.Client, model: str) -> str:
-    response: GenerateContentResponse = client.models.generate_content(  # pyright: ignore[reportUnknownMemberType]
+def no_tools(query: str, client: genai.Client, model: str) -> GenerateContentResponse:
+    return client.models.generate_content(
         model=model,
-        contents="Who are the current NBA Champions?",
+        contents=query,
     )
-    if response.text is not None:
-        return response.text
-    else:
-        return "no response"
 
 
-def with_tools(client: genai.Client, model: str) -> str:
-    response: GenerateContentResponse = client.models.generate_content(  # pyright: ignore[reportUnknownMemberType]
+def with_tools(query: str, client: genai.Client, model: str) -> GenerateContentResponse:
+    return client.models.generate_content(
         model=model,
-        contents="Who are the current NBA Champions?",
+        contents=query,
         config=types.GenerateContentConfig(tools=[get_current_nba_champions]),
     )
-    if response.text is not None:
-        return response.text
-    else:
-        return "no response"
+
+
+def print_response(query: str, response: GenerateContentResponse):
+    print(f"\n🔍 Query: {query}")
+    print("-" * 30)
+    print(f"🤖 Answer: {response.text}")
 
 
 if __name__ == "__main__":

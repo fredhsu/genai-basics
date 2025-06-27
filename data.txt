@@ -1,4 +1,3 @@
-The DCS-7280CR3K-32D4 comes with accessory kits KIT-7001 and KIT-2POST-1U-NT
-The DCS-7280CR3K-96 comes with accessory kits KIT-7202 
-The DCS-7280CR3A-72 comes with accessory kit KIT-7201
-
+DCS-7280CR3K-32D4 comes with accessory kits KIT-7001 and KIT-2POST-1U-NT
+DCS-7280CR3K-96 comes with accessory kit KIT-7202 
+DCS-7280CR3A-72 comes with accessory kit KIT-7201
